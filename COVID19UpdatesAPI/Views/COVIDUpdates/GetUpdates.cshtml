@@ -1,0 +1,234 @@
+﻿
+@{
+    ViewData["Title"] = "GetUpdates";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>COVID-19 Updates</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
+
+
+        .w3-black, .w3-hover-black:hover {
+            color: #fff !important;
+            background-color: darkgray !important
+        }
+    </style>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin-top: 29px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .txtboarders {
+            border: none;
+            border-bottom: outset;
+            background-color: transparent;
+            resize: none;
+            outline: none;
+        }
+
+    </style>
+
+</head>
+<body class="w3-light-grey">
+
+    <!-- Top container -->
+    <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+        <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+        <span class="w3-bar-item w3-right" style="color:darkgray">Login</span>
+    </div>
+
+    <form>
+        <div class="container w3-bar-item w3-right">
+
+            <input type="text" id="txtCountry" name="txtCountry" class="txtboarders" placeholder="Enter Country Name">
+            <input type="text" id="txtState" name="txtState" class="txtboarders" placeholder="Enter State Name">
+            <input type="datetime-local" id="txtDate" name="txtDate"  class="txtboarders" placeholder="Enter Date" min="2020-03-01T00:00" max=@DateTime.Today>
+            <input type="button" id="btnSubmit" value="View Updates"  class="txtboarders" style="background-color: #2196F3; color: white;">
+
+        </div>
+    </form>
+
+    <div class="w3-main" style="margin-left:0px;margin-top:0px;">
+
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> COVID-19 Updates</b></h5>
+        </header>
+
+        <div class="w3-row-padding w3-margin-bottom" style="margin-top:0px">
+            <div class="w3-quarter">
+                <div class="w3-container w3-yellow w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-check-circle-o w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3><label id="lblConfirmed"/></h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Confirmed</h4>
+                </div>
+            </div>
+            <div class="w3-quarter">
+                <div class="w3-container w3-red w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-ban w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3><label id="lblDeaths" /></h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Deaths</h4>
+                </div>
+            </div>
+            <div class="w3-quarter">
+                <div class="w3-container w3-green w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3><label id="lblRecovered" /></h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Recovered</h4>
+                </div>
+            </div>
+            <div class="w3-quarter">
+                <div class="w3-container w3-blue w3-text-white w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3><label id="lblActive" /></h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Active</h4>
+                </div>
+            </div>
+        </div>
+
+        <table id="tblView">
+            <thead style="background-color: #2196f36b!important;">
+                <tr>
+                    <th>Country</th>
+                    <th>state</th>
+                    <th>Confirmed</th>
+                    <th>Deaths</th>
+                    <th>Recovered</th>
+                    <th>Active casess</th>
+                    <th>Last Updated On</th>
+                </tr>
+            </thead>
+            <tbody id="tblbody">
+               
+            </tbody>
+           
+        </table>
+
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
+    </script>
+
+    <script>
+
+        $(function () {
+            $("#tblView").hide();
+        });
+
+        $("#btnSubmit").click(function () {
+           
+            var txtCountry = $("#txtCountry").val();
+            var txtState = $("#txtState").val();
+            var txtDate = $("#txtDate").val();
+            
+            if (txtDate == undefined || txtDate == "")
+                txtDate = '01/01/0001 00:00:00';
+
+            $("#tblbody").find('tr').each(function () {
+
+                $(this).closest('tr').remove();
+            });
+
+            $("#tblView").show();
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("getcovidupdates", "covidupdates")',
+                data: {
+                    country: txtCountry, state: txtState, lastUpdatedDate: txtDate
+                },
+                cache: false,
+                async: false,
+                success: function (response) {
+                    
+                    var confirmed = parseInt(0); var deaths = parseInt(0); var recovered = parseInt(0); var active = parseInt(0);
+                    $(response).each(function (index, item) {
+
+                        $('#tblView tbody').append(
+                            '<tr><td>' + item.country_Region +
+                            '</td><td>' + item.province_State +
+                            '</td><td>' + item.confirmed +
+                            '</td><td>' + item.deaths +
+                            '</td><td>' + item.recovered +
+                            '</td><td>' + item.active +
+                            '</td><td>' + item.lastUpdatedDate +
+                            '</td></tr>'
+                        )
+
+                        confirmed += parseInt(item.confirmed);
+                        deaths += parseInt(item.deaths);
+                        recovered += parseInt(item.recovered);
+                        active += parseInt(item.active);
+                        
+                        $("#lblConfirmed").text(confirmed);
+                        $("#lblDeaths").text(deaths);
+                        $("#lblRecovered").text(recovered);
+                        $("#lblActive").text(active);
+
+                    });
+
+                }
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
