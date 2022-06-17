@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using COVID19UpdatesAPI.Interfaces;
@@ -12,7 +13,7 @@ namespace COVID19UpdatesAPI.Controllers
     [ApiController]
     public class COVIDUpdatesController : Controller
     {
-        #region constructor
+        #region Constructor
 
         private readonly ICOVIDUpdatesService _covidUpdatesService;
         public COVIDUpdatesController(ICOVIDUpdatesService covidUpdatesService)
@@ -22,7 +23,8 @@ namespace COVID19UpdatesAPI.Controllers
 
         #endregion
 
-        #region GetUpdates
+        #region View Dashboard
+
         [HttpGet]
         [Route("getupdates")]
         public IActionResult GetUpdates()
@@ -39,10 +41,8 @@ namespace COVID19UpdatesAPI.Controllers
 
         #endregion
 
-        #region Set Updates
+        #region Set Updates Params
 
-        // GET api/covidupdates/getcovidupdates?country=Brazil&state=Ceara
-        // https://localhost:44329/api/covidupdates/getcovidupdates?country=Brazil&state=Ceara
         [HttpGet("{id}")]
         [Route("getcovidupdates")]
         public ActionResult<IEnumerable<ViewUpdatesVM>> GetCOVIDUpdates(string country, string state, DateTime lastUpdatedDate)

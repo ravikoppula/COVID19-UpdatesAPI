@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.1231
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "COVID19UpdatesAPI", "COVID19UpdatesAPI\COVID19UpdatesAPI.csproj", "{CBD41146-F077-42E5-B55C-1B39CC2B2D0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COVID19UpdatesAPI.NUnitTest", "COVID19UpdatesAPI.NUnitTest\COVID19UpdatesAPI.NUnitTest.csproj", "{78488751-9CF7-4D83-B679-20D7D77A9B07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COVID19UpdatesAPIXUnitTest", "COVID19UpdatesAPIXUnitTest\COVID19UpdatesAPIXUnitTest.csproj", "{C65BD319-0E05-4093-B770-98BC36019C4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{CBD41146-F077-42E5-B55C-1B39CC2B2D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD41146-F077-42E5-B55C-1B39CC2B2D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD41146-F077-42E5-B55C-1B39CC2B2D0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78488751-9CF7-4D83-B679-20D7D77A9B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78488751-9CF7-4D83-B679-20D7D77A9B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78488751-9CF7-4D83-B679-20D7D77A9B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78488751-9CF7-4D83-B679-20D7D77A9B07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C65BD319-0E05-4093-B770-98BC36019C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C65BD319-0E05-4093-B770-98BC36019C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C65BD319-0E05-4093-B770-98BC36019C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C65BD319-0E05-4093-B770-98BC36019C4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,12 +12,12 @@ COPY ["COVID19UpdatesAPI/COVID19UpdatesAPI.csproj", "COVID19UpdatesAPI/"]
 RUN dotnet restore "COVID19UpdatesAPI/COVID19UpdatesAPI.csproj"
 COPY . .
 WORKDIR "/src/COVID19UpdatesAPI"
-RUN dotnet build "COVID19UpdatesAPI.csproj" -c Release -o /app
+RUN dotnet build "COVID19UpdatesAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "COVID19UpdatesAPI.csproj" -c Release -o /app
+RUN dotnet publish "COVID19UpdatesAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "COVID19UpdatesAPI.dll"]
